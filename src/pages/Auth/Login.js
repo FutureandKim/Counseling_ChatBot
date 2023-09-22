@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import icon from "../../assets/mainIcon.png";
+import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
   height: 100vh;
@@ -48,29 +49,33 @@ function Login() {
     const [selectedDate, setSelectedDate] = useState(null); 
     const [name, setName] = useState("");
     const [errorMessage, setErrorMessage] = useState(""); 
+    const navigate = useNavigate();
 
- 
     const toggleCalendar = () => {
         setShowCalendar(!showCalendar);
     }
 
- 
     const handleDateChange = (date) => {
         setSelectedDate(date);
         setShowCalendar(false); 
     }
 
-
     const handleLoginClick = () => {
-        if (!name || !selectedDate) {
-            setErrorMessage("입력을 다시 확인해주세요");
-        } if(!name)
-            setErrorMessage("이름을 입력해주세요");
-        else if(!selectedDate)
-            setErrorMessage("날짜를 선택해주세요");
-        else {
-            // 로그인 로직을 추가할 부분
-            setErrorMessage(""); 
+      if (!name || !selectedDate) {
+          setErrorMessage("입력을 다시 확인해주세요");
+      } if(!name)
+          setErrorMessage("이름을 입력해주세요");
+      else if(!selectedDate)
+          setErrorMessage("생년월일을 선택해주세요");
+      else {
+          setErrorMessage(""); 
+
+          const inputName = name;
+          const inputDate = selectedDate ? selectedDate.toLocaleDateString() : '';
+          const confirmation = window.confirm(`${inputName}(${inputDate})님이 맞으신가요?`);
+          if (confirmation) {
+            navigate("/main");
+          }
         }
     }
 

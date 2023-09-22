@@ -9,12 +9,12 @@ const TitlePage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ivory;
+  background-color: ivory; /* rgb(241, 239, 237); */
 `
 
 const OrangeBox = styled.div`
   background-color: #eea849;
-  width: 25%;
+  width: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
