@@ -2,12 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import Menubar from "../components/Menubar";
 
+const Background = styled.div`
+  height: 100vh;
+  background-color: ivory;
+`
+
+
 function Main() {
     return (
-      <div className="App">
+      <Background>
         <Menubar />
         메인페이지
-      </div>
+      </Background>
     );
   }
   
