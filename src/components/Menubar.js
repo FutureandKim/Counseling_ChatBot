@@ -10,7 +10,7 @@ const Background = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 100px;
+    height: 10vh;
     font-size: 20px;
 `
 

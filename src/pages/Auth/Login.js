@@ -61,9 +61,7 @@ function Login() {
     }
 
     const handleLoginClick = () => {
-      if (!name || !selectedDate) {
-          setErrorMessage("입력을 다시 확인해주세요");
-      } if(!name)
+      if(!name)
           setErrorMessage("이름을 입력해주세요");
       else if(!selectedDate)
           setErrorMessage("생년월일을 선택해주세요");
@@ -78,7 +76,6 @@ function Login() {
           }
         }
     }
-
     return (
       <Background>
         <MainIcon src={icon}></MainIcon>
