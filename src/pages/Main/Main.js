@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Menubar from "../components/Menubar";
+import Menubar from "../../components/Menubar";
+import ChatProfile from "./Chat";
 
 const Background = styled.div`
   height: 100vh;
@@ -12,7 +13,7 @@ function Main() {
     return (
       <Background>
         <Menubar />
-        메인페이지
+        <ChatProfile />
       </Background>
     );
   }
