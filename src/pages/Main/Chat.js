@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import icon from "../../assets/mainIcon.png";
 
 const Background = styled.div`
   height: 85vh;
@@ -11,58 +12,82 @@ const Background = styled.div`
 `;
 
 const ChatContainer = styled.div`
-  width: 500px;
+  width: 600px;
   height: 70vh;
   margin-top: 30px;
-  border: 1px solid #ccc;
   padding: 16px;
   overflow-y: scroll;
-  @media (max-width: 550px) {
+  @media (max-width: 650px) {
     width: 80%;
   }
 `;
 
 const Message = styled.div`
   display: flex;
+  align-items: flex-start; 
   margin-bottom: 8px;
 `;
 
-const ProfilePicture = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: lightblue;
-  border-radius: 50%;
+const ChatbotContainer = styled.div`
+  display: flex;
+  align-items: flex-start; 
+  margin-bottom: 8px;
+`;
+
+const ProfilePicture = styled.img`
+  width: 60px;
   margin-right: 8px;
 `;
+
+const ChatbotText = styled.div`
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #eea849;
+  word-wrap: break-word;
+  max-width: 55%; 
+`;
+
 
 const MessageText = styled.div`
   background-color: #fff;
   padding: 8px;
   border-radius: 8px;
+  border: 1px solid #eea849;
+  word-wrap: break-word;
+  max-width: 55%; 
 `;
 
+
+
 const InputContainer = styled.div`  
-  width: 500px;
+  width: 600px;
   flex-direction: column;
   padding: 16px;
   border-top: 1px solid #ccc;
-  @media (max-width: 550px) {
+  @media (max-width: 650px) {
     width: 80%;
   }
 `;
 
 const Input = styled.input`
-  width: 400px;
+  width: 500px;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #eea849;
   border-radius: 8px;
+  font-size: 16px;
   outline: none;
-  @media (max-width: 550px) {
+  @media (max-width: 650px) {
     width: 70%;
   }
 `;
 
-function Main() {
+const Send = styled.button`
+  margin-left: 10px;
+  font-size: 16px;
+`
+
+function Chat() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
@@ -75,11 +100,15 @@ function Main() {
 
   return (
     <Background>
+       <ChatContainer>
 
-      <ChatContainer>
+        <ChatbotContainer>
+        <ProfilePicture src={icon}/>
+        <ChatbotText>안녕하세요 오늘 하루 어떠셨나요?</ChatbotText>
+        </ChatbotContainer>
+
         {messages.map((message, index) => (
           <Message key={index}>
-            <ProfilePicture />
             <MessageText>{message.text}</MessageText>
           </Message>
         ))}
@@ -96,10 +125,10 @@ function Main() {
             }
           }}
         />
-        <button onClick={handleSendMessage}>보내기</button>
+        <Send onClick={handleSendMessage}>전송</Send>
       </InputContainer>
     </Background>
   );
 }
 
-export default Main;
+export default Chat;
