@@ -8,13 +8,13 @@ const Background = styled.div`
 `
 
 
-function Main() {
+const MyPage =()=> {
     return (
       <Background>
         <Menubar />
-        메인페이지
+        마이페이지
       </Background>
     );
   }
   
-  export default Main;
+  export default MyPage;
