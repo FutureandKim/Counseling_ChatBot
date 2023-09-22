@@ -22,12 +22,7 @@ const ChatContainer = styled.div`
   }
 `;
 
-const Message = styled.div`
-  display: flex;
-  align-items: flex-start; 
-  margin-bottom: 8px;
-`;
-
+//chatbot bubble
 const ChatbotContainer = styled.div`
   display: flex;
   align-items: flex-start; 
@@ -40,7 +35,7 @@ const ProfilePicture = styled.img`
 `;
 
 const ChatbotText = styled.div`
-  background-color: #fff;
+  background-color: #eea849;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #eea849;
@@ -48,6 +43,12 @@ const ChatbotText = styled.div`
   max-width: 55%; 
 `;
 
+//user bubble
+const Message = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+`;
 
 const MessageText = styled.div`
   background-color: #fff;
@@ -57,8 +58,6 @@ const MessageText = styled.div`
   word-wrap: break-word;
   max-width: 55%; 
 `;
-
-
 
 const InputContainer = styled.div`  
   width: 600px;
