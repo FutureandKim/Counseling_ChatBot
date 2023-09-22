@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import icon from "../../assets/mainIcon.png";
 
@@ -20,14 +20,23 @@ const ChatContainer = styled.div`
   @media (max-width: 650px) {
     width: 80%;
   }
+
+  /*스크롤바*/
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent; /*스크롤바 배경 색상*/
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #eea849; /* 스크롤바 색상 */
+    border-radius: 6px;
+  }
+  scrollbar-width: thin; /* 스크롤바 너비 */
+  scrollbar-color: #eea849 transparent; /* 썸과 트랙 색상 */
 `;
 
-const Message = styled.div`
-  display: flex;
-  align-items: flex-start; 
-  margin-bottom: 8px;
-`;
-
+//chatbot bubble
 const ChatbotContainer = styled.div`
   display: flex;
   align-items: flex-start; 
@@ -40,7 +49,7 @@ const ProfilePicture = styled.img`
 `;
 
 const ChatbotText = styled.div`
-  background-color: #fff;
+  background-color: #eea849;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #eea849;
@@ -48,6 +57,12 @@ const ChatbotText = styled.div`
   max-width: 55%; 
 `;
 
+//user bubble
+const Message = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+`;
 
 const MessageText = styled.div`
   background-color: #fff;
@@ -57,8 +72,6 @@ const MessageText = styled.div`
   word-wrap: break-word;
   max-width: 55%; 
 `;
-
-
 
 const InputContainer = styled.div`  
   width: 600px;
@@ -90,6 +103,7 @@ const Send = styled.button`
 function Chat() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const chatContainerRef = useRef(null);
 
   const handleSendMessage = () => {
     if (newMessage) {
@@ -98,9 +112,15 @@ function Chat() {
     }
   };
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   return (
     <Background>
-       <ChatContainer>
+       <ChatContainer ref={chatContainerRef}>
 
         <ChatbotContainer>
         <ProfilePicture src={icon}/>
