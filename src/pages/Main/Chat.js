@@ -98,6 +98,11 @@ const Input = styled.input`
 const Send = styled.button`
   margin-left: 10px;
   font-size: 16px;
+  background-color: #eea849;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  color: #fff;
 `
 
 function Chat() {
