@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
-import icon from "../assets/mainIcon.png";
 import About from "./About";
 import Title from "./Title";
 
@@ -11,19 +9,23 @@ const LandingPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  height: 100vh;
 `
-const TitleWrapper = styled.div`
-  flex-grow: 1;
+const ContentWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
 `
-
 function Landing() {
   return (
     <LandingPage>
-      <TitleWrapper>
+      <ContentWrapper>
         <Title />
-      </TitleWrapper>
+      </ContentWrapper>
+      <ContentWrapper>
         <About />
+      </ContentWrapper>
     </LandingPage>
   );
 }
