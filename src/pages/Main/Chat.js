@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import icon from "../../assets/mainIcon.png";
 
@@ -20,6 +20,20 @@ const ChatContainer = styled.div`
   @media (max-width: 650px) {
     width: 80%;
   }
+
+  /*스크롤바*/
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent; /*스크롤바 배경 색상*/
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #eea849; /* 스크롤바 색상 */
+    border-radius: 6px;
+  }
+  scrollbar-width: thin; /* 스크롤바 너비 */
+  scrollbar-color: #eea849 transparent; /* 썸과 트랙 색상 */
 `;
 
 //chatbot bubble
@@ -89,6 +103,7 @@ const Send = styled.button`
 function Chat() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const chatContainerRef = useRef(null);
 
   const handleSendMessage = () => {
     if (newMessage) {
@@ -97,9 +112,15 @@ function Chat() {
     }
   };
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   return (
     <Background>
-       <ChatContainer>
+       <ChatContainer ref={chatContainerRef}>
 
         <ChatbotContainer>
         <ProfilePicture src={icon}/>
