@@ -1,37 +1,44 @@
-import React from "react";
-import styled from "styled-components";
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import React, { useState, useEffect } from 'react';
+import { Carousel } from 'react-bootstrap';
+import icon from "../../assets/mainIcon.png";
 
-const AboutPage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
 
-const AboutBox = styled.div`
-  width: 100px;
-  height: 100px;
-  background-color: beige;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+const images = [
+  icon,
+  'image2.jpg',
+  'image3.jpg',
+  // 추가 이미지 경로들
+];
 
-const About = () => {
+function App() {
+  const [index, setIndex] = useState(0);
+
+  // 다음 이미지로 이동하는 함수
+  const nextSlide = () => {
+    setIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  // 3초마다 다음 슬라이드로 이동
+useEffect(() => {
+  const interval = setInterval(() => {
+    nextSlide();
+  }, 3000);
+  
+  return () => clearInterval(interval);
+}, [nextSlide]);
   return (
-    <AboutPage>
-      <Carousel>
-        <AboutBox>
-          <img src="" alt="이미지 1" />
-        </AboutBox>
-        <AboutBox>
-          <img src="" alt="이미지 2" />
-        </AboutBox>
-      </Carousel>
-    </AboutPage>
+    <Carousel activeIndex={index} onSelect={() => {}}>
+      {images.map((image, idx) => (
+        <Carousel.Item key={idx}>
+          <img
+            className="d-block w-100"
+            src={image}
+            alt={`Slide ${idx}`}
+          />
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 }
 
-export default About;
+export default App;
