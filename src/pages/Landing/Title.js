@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 import icon from "../../assets/mainIcon.png";
 
 const TitlePage = styled.div`
@@ -9,8 +8,9 @@ const TitlePage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ivory; /* rgb(241, 239, 237); */
-`
+  background-color: ivory;
+  overflow-x: hidden;
+`;
 
 const OrangeBox = styled.div`
   background-color: #eea849;
@@ -26,12 +26,12 @@ const OrangeBox = styled.div`
   @media (max-width: 400px) {
     width: 40%;
   }
-`
+`;
 
 const Icon = styled.img`
   margin-top: 100px;
   width: 60%;
-`
+`;
 
 const Des = styled.div`
   flex: 1;
@@ -42,47 +42,61 @@ const Des = styled.div`
   font-size: 40px;
   font-weight: bold;
   color: #343a40;
+  white-space: nowrap; /* 줄 바꿈 방지 */
+  overflow: hidden; /* 오버플로우 숨김 */
+  transform: translateX(${(props) => (props.slideIn ? "0" : "100%")}); /* 슬라이드 효과 적용 */
+  transition: transform 1s ease; /* 트랜지션 설정 */
+
   @media (max-width: 550px) {
     font-size: 30px;
   }
-`
+`;
 
-const Btn = styled.button`
-  position: absolute; 
-  right: 80px; 
-  bottom: 80px;
-  width: 150px;
-  height: 60px;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.2);
-  transition-duration: 0.2s;
-  &:active {
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
-  }
-`
+const aboutTexts = [
+  {
+    text:  (
+      <>
+        당신의 마음건강을 위한<br />AI 심리상담 챗봇
+      </>
+    ),
+    image: icon, // 이미지 추가
+  },
+  {
+    text: "다른 내용 1",
+    image: icon,
+  },
+  {
+    text: "다른 내용 2",
+    image: icon,
+  },
+];
 
-const AboutContainer = styled.div`
-  overflow-y: auto; 
-  flex: 1; 
-`
+const Title = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [slideIn, setSlideIn] = useState(true);
 
-const Title =()=> {
-    return (
-      <TitlePage>
-        <OrangeBox>
-          <Icon src={icon}></Icon>
-        </OrangeBox>
-        <Des>
-          당신의 마음건강을 위한<br/> AI 심리상담 챗봇
-        </Des>
-          <Link to="/Login">
-            <Btn>챗봇 사용 ➜</Btn>
-          </Link>
-      </TitlePage>
-    );
-  }
-  
-  export default Title;
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSlideIn(false); // 슬라이드 아웃
+      setTimeout(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % aboutTexts.length);
+        setSlideIn(true); // 슬라이드 인
+      }, 500); // 슬라이드 아웃 후 0.5초 뒤에 슬라이드 인
+    }, 3000);
+
+    return () => {
+      clearInterval(intervalId); // 컴포넌트가 언마운트되면 타이머 제거
+    };
+  }, []);
+
+  return (
+    <TitlePage>
+      <OrangeBox>
+        <Icon src={icon}></Icon>
+      </OrangeBox>
+      <Des slideIn={slideIn}>{aboutTexts[currentIndex].text}</Des>
+    </TitlePage>
+  );
+};
+
+export default Title;

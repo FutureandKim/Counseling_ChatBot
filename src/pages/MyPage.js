@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Menubar from "../components/Menubar";
 
 const Background = styled.div`
   height: 100vh;
   background-color: ivory;
-`
+`;
 
 const TitleBox = styled.div`
   width: 70%;
@@ -22,12 +22,13 @@ const TitleBox = styled.div`
   @media (max-width: 300px) {
     font-size: 10px;
     padding: 15px;
-  }
+  } 
   @media (min-width: 1200px) {
     font-size: 20px;
     padding: 25px;
   }
-`
+`;
+
 const Bold = styled.span`
   font-size: 30px;
   color: #808080;
@@ -38,19 +39,20 @@ const Bold = styled.span`
   @media (min-width: 1200px) {
     font-size: 35px;
   }
-`
+`;
 
-const MyPage =()=> {
-    return (
-      <Background>
-        <Menubar />
-        <TitleBox>
-          <Bold>BrainStorming</Bold>
-          감정과 상태를 스스로 기록하고 관리해보세요.
-        </TitleBox>
+const MyPage = () => {
+  return (
+    <Background>
+      <Menubar />
+      <TitleBox>
+        <Bold>BrainStorming</Bold>
+        감정과 상태를 스스로 기록하고 관리해보세요.
+      </TitleBox>
 
-      </Background>
-    );
-  }
-  
-  export default MyPage;
+      
+    </Background>
+  );
+};
+
+export default MyPage;
