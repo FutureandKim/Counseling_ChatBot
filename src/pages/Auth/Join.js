@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import icon from "../../assets/mainIcon.png";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
   height: 100vh;
@@ -17,8 +17,19 @@ const Background = styled.div`
 
 const MainIcon = styled.img`
   width: 100px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 ` 
+
+const Text = styled.div`
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+`
+
+const Bold = styled.span`
+  font-weight: bold;
+`
+
 const NameField = styled.input`
   margin-bottom: 10px;
   padding: 5px;
@@ -44,13 +55,7 @@ const Button = styled.button`
   border-radius: 3px;
 `
 
-const JoinLink = styled(Link)`
-  margin-top: 10px;
-  color: gray;
-  text-decoration: none;
-`
-
-function Login() {
+function Join() {
     const [showCalendar, setShowCalendar] = useState(false); 
     const [selectedDate, setSelectedDate] = useState(null); 
     const [name, setName] = useState("");
@@ -78,13 +83,15 @@ function Login() {
           const inputDate = selectedDate ? selectedDate.toLocaleDateString() : '';
           const confirmation = window.confirm(`${inputName}(${inputDate})님이 맞으신가요?`);
           if (confirmation) {
-            navigate("/main");
+            alert(`${inputName}님 환영합니다!`)
+            navigate("/");
           }
         }
     }
     return (
       <Background>
         <MainIcon src={icon}></MainIcon>
+        <Text>회원가입을 위해<br/><Bold>이름</Bold>과 <Bold>생년월일</Bold>을 입력해주세요</Text>
         <NameField
           type="text"
           placeholder="이름"
@@ -104,12 +111,11 @@ function Login() {
             value={selectedDate}
           />
         )}
-        <Button onClick={handleLoginClick}>CONTINUE</Button>
-        <JoinLink to="/join">회원가입</JoinLink>
+        <Button onClick={handleLoginClick}>Join</Button>
         <p style={{ color: "red" }}>{errorMessage}</p>
         
       </Background>
     );
 }
 
-export default Login;
+export default Join;
