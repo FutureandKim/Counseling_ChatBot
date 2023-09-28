@@ -62,11 +62,19 @@ const aboutTexts = [
     image: icon, // 이미지 추가
   },
   {
-    text: "다른 내용 1",
+    text: (
+      <>
+        당신의 불안한 마음을 <br />위로해드립니다
+      </>
+    ),
     image: icon,
   },
   {
-    text: "다른 내용 2",
+    text: (
+      <>
+        생각과 감정을 <br />스스로 정리하고 관리해보세요
+      </>
+    ),
     image: icon,
   },
 ];
